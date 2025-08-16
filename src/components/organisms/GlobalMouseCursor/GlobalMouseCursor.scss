@@ -1,0 +1,21 @@
+// GlobalMouseCursor.scss
+.global-mouse-cursor {
+    // This naming should match what's used in GlobalMouseCursor.tsx
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    width: 100px !important; // Big for testing
+    height: 100px !important;
+}
+
+// Hide system cursor when showing custom cursor
+body.custom-cursor {
+    // This naming should match what's set in MouseCursorContext
+    cursor: none !important;
+
+    * {
+        cursor: none !important;
+    }
+}

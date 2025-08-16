@@ -1,0 +1,42 @@
+{
+  "name": "my-react-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "// Component Generation - Atomic Design": "",
+    "gen:atom": "npx generate-react-cli component --path=src/components/atoms",
+    "gen:molecule": "npx generate-react-cli component --path=src/components/molecules",
+    "gen:organism": "npx generate-react-cli component --path=src/components/organisms",
+    "gen:template": "npx generate-react-cli component --path=src/components/templates",
+    "// Alternative shorter aliases": "",
+    "atom": "npm run gen:atom",
+    "molecule": "npm run gen:molecule",
+    "organism": "npm run gen:organism",
+    "template": "npm run gen:template"
+  },
+  "dependencies": {
+    "@lottiefiles/dotlottie-react": "^0.15.0",
+    "next": "15.4.6",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "sass": "^1.90.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@testing-library/jest-dom": "^6.7.0",
+    "@testing-library/react": "^16.3.0",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "generate-react-cli": "^8.4.9",
+    "jest": "^30.0.5",
+    "jest-environment-jsdom": "^30.0.5",
+    "tailwindcss": "^4",
+    "typescript": "5.9.2"
+  }
+}

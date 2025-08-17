@@ -1,35 +1,63 @@
-// components/molecules/CursorFactory/CursorFactory.tsx
-import React from 'react';
-import MouseDefault from '../../atoms/MouseDefault/MouseDefault';
-import MouseLoading from '../../atoms/MouseLoading/MouseLoading';
-//import MouseText from '../../atoms/MouseText/MouseText';
-//import MouseButton from '../../atoms/MouseButton/MouseButton';
-// ... import other cursor types
-
-import { CursorType } from '../../../contexts/MouseCursorContext/MouseCursorContext';
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import React from "react";
+import { CursorType } from "../../../contexts/MouseCursorContext/MouseCursorContext";
+import "./CursorFactory.scss";
 
 interface CursorFactoryProps {
   type: CursorType;
 }
 
+const cursorConfig: Record<CursorType, { src: string; loop?: boolean; speed?: number }> = {
+  default: {
+    src: "https://lottie.host/e14d5998-b575-4884-84b4-5da4473ee3ab/3doQoZxFDR.lottie",
+    loop: true,
+    speed: 2,
+  },
+  loading: {
+    src: "https://lottie.host/1cf88e99-4f90-4a8a-a59d-d8b0efeb5755/JwLekCYaFR.lottie",
+    loop: true,
+    speed: 1.25,
+  },
+  text: {
+    src: "https://lottie.host/text.lottie",
+    loop: true,
+    speed: 1,
+  },
+  button: {
+    src: "https://lottie.host/button.lottie",
+    loop: true,
+    speed: 1,
+  },
+  link: {
+    src: "https://lottie.host/link.lottie",
+    loop: true,
+    speed: 1,
+  },
+  disabled: {
+    src: "https://lottie.host/disabled.lottie",
+    loop: false,
+    speed: 1,
+  },
+  drag: {
+    src: "https://lottie.host/drag.lottie",
+    loop: true,
+    speed: 1,
+  },
+};
+
 const CursorFactory: React.FC<CursorFactoryProps> = ({ type }) => {
-  switch (type) {
-    case 'loading':
-      return <MouseLoading />;
-    case 'text':
-      return //<MouseText />;
-    case 'button':
-      return //<MouseButton />;
-    case 'link':
-      return //<MouseLink />;
-    case 'disabled':
-      return //<MouseDisabled />;
-    case 'drag':
-      return //<MouseDrag />;
-    case 'default':
-    default:
-      return <MouseDefault />;
-  }
+  const config = cursorConfig[type] || cursorConfig.default;
+
+  return (
+    <div className={`CursorFactory CursorFactory--${type}`}>
+      <DotLottieReact
+        src={config.src}
+        loop={config.loop ?? true}
+        autoplay
+        speed={config.speed ?? 1}
+      />
+    </div>
+  );
 };
 
 export default CursorFactory;

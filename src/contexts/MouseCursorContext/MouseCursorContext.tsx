@@ -1,5 +1,5 @@
 "use client";
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 
 export type CursorType = 'default' | 'loading' | 'text' | 'button' | 'link' | 'disabled' | 'drag';
 
@@ -18,7 +18,7 @@ interface MouseCursorProviderProps {
 }
 
 export const MouseCursorProvider: React.FC<MouseCursorProviderProps> = ({ children }) => {
-  const [cursorType, setCursorType] = useState<CursorType>('default');
+  const [cursorType, setCursorType] = useState<CursorType>('loading');
   const [isMouseInWindow, setIsMouseInWindow] = useState(true);
   const [showCustomCursor, setShowCustomCursor] = useState(true);
 

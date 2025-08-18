@@ -2,10 +2,12 @@ services:
   nextjs-app:
     build:
       context: .
-      target: development
     ports:
       - "3000:3000"
     working_dir: /app
     volumes:
       - ./:/app
-      - /app/node_modules # Simple anonymous volume
+
+#      - node_modules_folder:/app/node_modules # named volume for node_modules
+#volumes:
+#  node_modules_folder: #declaration of named volume

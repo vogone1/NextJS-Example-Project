@@ -1,0 +1,40 @@
+.click-pulse-layer {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    /* allow clicks to pass through */
+    z-index: 9998;
+    /* under custom cursor if needed */
+}
+
+.click-pulse {
+    position: fixed;
+    /* fixed to viewport, matches clientX/clientY */
+    left: 0;
+    top: 0;
+    transform: translate(-50%, -50%);
+    /* center on provided left/top */
+    width: 24px;
+    height: 24px;
+    border-radius: 9999px;
+    background: rgb(21, 66, 31);
+    box-shadow: 0 0 0 2px rgba(40, 124, 65, 0.654) inset;
+    will-change: transform, opacity;
+    animation: clickPulse 600ms ease-out forwards;
+}
+
+@keyframes clickPulse {
+    0% {
+        transform: translate(-50%, -50%) scale(0.2);
+        opacity: 0.9;
+    }
+
+    70% {
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(9);
+        opacity: 0;
+    }
+}

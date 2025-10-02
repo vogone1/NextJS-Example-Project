@@ -1,11 +1,10 @@
-.CursorFactory {
+.Cursor {
     width: 100%;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 
-    // Ensure Lottie animation fills the container
     canvas,
     svg {
         width: 100% !important;
@@ -13,29 +12,26 @@
     }
 }
 
-// Optional per-type styling
-.CursorFactory--loading {}
-
-.CursorFactory--default {
+.Cursor--default {
     opacity: 0.9;
 }
 
-.CursorFactory--button {
+.Cursor--button {
     opacity: 1;
 }
 
-.CursorFactory--text {
+.Cursor--text {
     opacity: 1;
 }
 
-.CursorFactory--link {
+.Cursor--link {
     opacity: 1;
 }
 
-.CursorFactory--disabled {
+.Cursor--disabled {
     opacity: 0.5;
 }
 
-.CursorFactory--drag {
+.Cursor--drag {
     opacity: 1;
 }

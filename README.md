@@ -107,15 +107,6 @@ Since dependencies are installed inside the container, you should add packages t
 
 ---
 
-## 🤝 Contributing
-
-1. Fork the repo
-2. Create a new branch
-3. Make your changes
-4. Push and open a PR
-
----
-
 ## 📜 License
 
 MIT

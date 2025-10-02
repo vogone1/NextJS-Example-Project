@@ -1,8 +1,8 @@
 // app/layout.tsx
+import GlobalMouseCursor from "@/src/components/organisms/GlobalMouseCursor/GlobalMouseCursor";
+import { MouseCursorProvider } from "@/src/contexts/MouseCursorContext/MouseCursorContext";
 import type { Metadata } from "next";
 import "./globals.css";
-import { MouseCursorProvider } from "@/src/contexts/MouseCursorContext/MouseCursorContext";
-import GlobalMouseCursor from "@/src/components/organisms/GlobalMouseCursor/GlobalMouseCursor";
 
 export const metadata: Metadata = {
   title: "My App",
@@ -19,7 +19,7 @@ export default function RootLayout({
       <body>
         <MouseCursorProvider>
           {children}
-          <GlobalMouseCursor /> {/* This handles both default AND loading states */}
+          <GlobalMouseCursor />
         </MouseCursorProvider>
       </body>
     </html>

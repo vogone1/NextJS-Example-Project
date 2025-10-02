@@ -19,7 +19,7 @@ interface MouseCursorProviderProps {
 
 export const MouseCursorProvider: React.FC<MouseCursorProviderProps> = ({ children }) => {
   const [cursorType, setCursorType] = useState<CursorType>('loading');
-  const [isMouseInWindow, setIsMouseInWindow] = useState(true);
+  const [isMouseInWindow, setIsMouseInWindow] = useState(false);
   const [showCustomCursor, setShowCustomCursor] = useState(true);
 
   useEffect(() => {
@@ -35,7 +35,7 @@ export const MouseCursorProvider: React.FC<MouseCursorProviderProps> = ({ childr
     };
   }, [showCustomCursor]);
 
-  // Mouse detection (keep existing code)
+  // Mouse detection
   useEffect(() => {
     const handleMouseEnter = () => setIsMouseInWindow(true);
     const handleMouseLeave = () => setIsMouseInWindow(false);

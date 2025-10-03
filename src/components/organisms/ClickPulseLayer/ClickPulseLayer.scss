@@ -17,24 +17,30 @@
     width: 24px;
     height: 24px;
     border-radius: 9999px;
-    background: rgb(21, 66, 31);
-    box-shadow: 0 0 0 2px rgba(40, 124, 65, 0.654) inset;
+    background: rgba(187, 187, 187, 0.44);
+    box-shadow: 0 0 0 0.5px rgba(255, 255, 255, 0.434) inset;
     will-change: transform, opacity;
-    animation: clickPulse 600ms ease-out forwards;
+    animation: clickPulse 1000ms ease-out forwards;
 }
 
 @keyframes clickPulse {
     0% {
         transform: translate(-50%, -50%) scale(0.2);
-        opacity: 0.9;
+        opacity: 0.2;
     }
 
-    70% {
-        opacity: 0.5;
+    50% {
+        transform: translate(-50%, -50%) scale(3);
+        opacity: 1;
+    }
+
+    90% {
+        transform: translate(-50%, -50%) scale(4);
+        opacity: 0.2;
     }
 
     100% {
-        transform: translate(-50%, -50%) scale(9);
+        transform: translate(-50%, -50%) scale(5);
         opacity: 0;
     }
 }

@@ -1,26 +1,111 @@
 @import "tailwindcss";
 
+/* Bold Futuristic Theme Tokens */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Colors - Light */
+  --bg: #F8F9FB;
+  --fg: #0A0B0E;
+  --muted: #676C73;
+  --border: #E3E5EA;
+
+  --accent: #7C3AED;
+  /* purple */
+  --accent-contrast: #FFFFFF;
+
+  /* Radii & Shadows */
+  --radius: 12px;
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-2: 0 8px 24px rgba(0, 0, 0, 0.08);
+
+  /* Typography sizing */
+  --text: 16px;
+  --lh: 1.6;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+html[data-theme='dark'] {
+  /* Colors - Dark */
+  --bg: #0A0B0E;
+  --fg: #E8EAF0;
+  --muted: #8A90A0;
+  --border: #1B1E25;
+
+  --accent: #A78BFA;
+  /* purple (lighter for dark) */
+  --accent-contrast: #0A0B0E;
 }
 
+/* Respect user preference if theme not explicitly set */
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  :root:not([data-theme]) {
+    color-scheme: dark;
+    --bg: #0A0B0E;
+    --fg: #E8EAF0;
+    --muted: #8A90A0;
+    --border: #1B1E25;
+    --accent: #A78BFA;
+    --accent-contrast: #0A0B0E;
   }
 }
 
+/* Base */
+html {
+  background: var(--bg);
+  color: var(--fg);
+  color-scheme: light dark;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-fira, ui-monospace, "Fira Code", "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+  font-size: var(--text);
+  line-height: var(--lh);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Headings scale */
+h1 {
+  font-size: clamp(32px, 6vw, 56px);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+h2 {
+  font-size: clamp(24px, 4vw, 36px);
+  line-height: 1.2;
+}
+
+h3 {
+  font-size: clamp(20px, 3vw, 28px);
+  line-height: 1.25;
+}
+
+/* Links */
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Buttons (baseline) */
+button {
+  font-family: inherit;
+}
+
+/* Focus styles */
+:where(button, a, input, textarea, select, [role='button']):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+/* Selection */
+::selection {
+  background: color-mix(in oklab, var(--accent), transparent 60%);
 }

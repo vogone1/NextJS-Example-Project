@@ -1,4 +1,3 @@
-//add "use client" for lottie files to work in Next.js
 'use client';
 import React from 'react';
 import './Home.scss';
@@ -9,7 +8,11 @@ const Home: React.FC = () => {
       <div className="container">
         <header className="hero">
           <p className="eyebrow">Frontend Engineer</p>
-          <h1>Build fast, beautiful, accessible UIs</h1>
+          <h1>
+            Build{' '}
+            {' '}
+            UIs
+          </h1>
           <p className="lede">I design and ship modern web experiences with performance, DX, and delightful details at the core.</p>
           <div className="actions">
             <a className="primary" href="/projects">View Projects</a>

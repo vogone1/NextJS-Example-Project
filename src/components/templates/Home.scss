@@ -54,3 +54,24 @@
     border: 1px solid var(--border);
     color: var(--fg);
 }
+
+/* Prevent inline Rive canvas from causing layout/resize loops */
+.riveAnchor {
+    position: relative;
+    display: inline-block;
+    /* Reserve width but zero height so it doesn't push layout */
+    width: var(--rive-w, clamp(180px, 28vw, 520px));
+    height: 0;
+    vertical-align: baseline;
+}
+
+.riveOverlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    /* fine-tuned via inline style if needed */
+    width: var(--rive-w, clamp(180px, 28vw, 520px));
+    height: var(--rive-h, 280px);
+    pointer-events: none;
+    z-index: 2;
+}

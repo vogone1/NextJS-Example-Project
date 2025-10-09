@@ -1,15 +1,49 @@
 'use client';
-import React from 'react';
+import { Alignment, Fit, Layout, useRive } from '@rive-app/react-canvas';
 import './Home.scss';
 
-const Home: React.FC = () => {
+export default function Home() {
+  const { RiveComponent } = useRive({
+    src: '/fast_stroke_test.riv',
+    autoplay: true,
+    layout: new Layout({
+      fit: Fit.Contain,
+      alignment: Alignment.Center,
+    }),
+  });
+  // Control overlay placement and size consistently between the words
+  const overlayWidth = 500; // px
+  const overlayHeight = 500; // px
   return (
-    <section className="fullPageSection">
+    <section className="fullPageSection u-noSelect">
       <div className="container">
         <header className="hero">
           <p className="eyebrow">Frontend Engineer</p>
-          <h1>
-            Build{' '}
+          <h1 style={{ position: 'relative', zIndex: 1 }}>
+            Build
+            {' '}
+            {/* Anchor reserves horizontal space but contributes zero height */}
+            <span
+              className="riveAnchor"
+              aria-hidden="true"
+              style={{
+                // Pass CSS variables so SCSS can keep anchor and overlay sized identically
+                ['--rive-w' as any]: `${overlayWidth}px`,
+                ['--rive-h' as any]: `${overlayHeight}px`,
+              }}
+            >
+              <span
+                className="riveOverlay"
+                style={{
+                  // Raise the overlay to sit between the words and overlap the lede
+                  top: '-5.25em',
+                }}
+              >
+                <RiveComponent
+                  style={{ width: '100%', height: '100%', display: 'block' }}
+                />
+              </span>
+            </span>
             {' '}
             UIs
           </h1>
@@ -22,6 +56,4 @@ const Home: React.FC = () => {
       </div>
     </section>
   );
-};
-
-export default Home;
+}

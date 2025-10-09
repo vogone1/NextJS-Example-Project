@@ -1,5 +1,5 @@
 "use client";
-import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react';
+import { createContext, type ReactNode, useContext, useEffect, useState } from 'react';
 
 export type CursorType = 'default' | 'loading' | 'text' | 'button' | 'link' | 'disabled' | 'drag';
 
@@ -15,12 +15,29 @@ const MouseCursorContext = createContext<MouseCursorContextType | undefined>(und
 
 interface MouseCursorProviderProps {
   children: ReactNode;
+  initialShowCustomCursor?: boolean; // from server cookie
 }
 
-export const MouseCursorProvider: React.FC<MouseCursorProviderProps> = ({ children }) => {
+export function MouseCursorProvider({ children, initialShowCustomCursor = true }: MouseCursorProviderProps) {
   const [cursorType, setCursorType] = useState<CursorType>('loading');
   const [isMouseInWindow, setIsMouseInWindow] = useState(false);
-  const [showCustomCursor, setShowCustomCursor] = useState(true);
+  const [showCustomCursor, setShowCustomCursor] = useState<boolean>(initialShowCustomCursor);
+
+  // Persist to cookie
+  useEffect(() => {
+    try {
+      const secure = typeof window !== 'undefined' && window.location.protocol === 'https:';
+      document.cookie = [
+        `showCustomCursor=${showCustomCursor ? '1' : '0'}`,
+        'Path=/',
+        'SameSite=Lax',
+        'Max-Age=31536000', // 1 year
+        secure ? 'Secure' : undefined,
+      ]
+        .filter(Boolean)
+        .join('; ');
+    } catch { }
+  }, [showCustomCursor]);
 
   useEffect(() => {
     // Hide system cursor when showing ANY custom cursor
@@ -70,7 +87,7 @@ export const MouseCursorProvider: React.FC<MouseCursorProviderProps> = ({ childr
       {children}
     </MouseCursorContext.Provider>
   );
-};
+}
 
 export const useMouseCursor = () => {
   const context = useContext(MouseCursorContext);

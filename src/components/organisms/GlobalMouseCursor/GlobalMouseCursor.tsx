@@ -1,12 +1,12 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useMouseCursor } from "../../../contexts/MouseCursorContext/MouseCursorContext";
 import Cursor from "../../atoms/Cursor/Cursor";
 import ClickPulseLayer from "./../ClickPulseLayer/ClickPulseLayer";
 import "./GlobalMouseCursor.scss";
 
-const GlobalMouseCursor: React.FC = () => {
-  // All hooks at the top, always called
+export default function GlobalMouseCursor() {
+  // All hooks at the top
   const { cursorType, isMouseInWindow, showCustomCursor } = useMouseCursor();
   const cursorRef = useRef<HTMLDivElement>(null);
   const rafIdRef = useRef<number | null>(null);
@@ -60,6 +60,4 @@ const GlobalMouseCursor: React.FC = () => {
       <ClickPulseLayer />
     </>
   );
-};
-
-export default GlobalMouseCursor;
+}

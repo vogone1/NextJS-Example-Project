@@ -1,8 +1,8 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import "./ClickPulseLayer.scss";
 
-const ClickPulseLayer: React.FC = () => {
+export default function ClickPulseLayer() {
     const layerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -35,6 +35,4 @@ const ClickPulseLayer: React.FC = () => {
     }, []);
 
     return <div className="click-pulse-layer" ref={layerRef} aria-hidden="true" />;
-};
-
-export default ClickPulseLayer;
+}

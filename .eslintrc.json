@@ -1,0 +1,38 @@
+{
+    "root": true,
+    "extends": [
+        "next/core-web-vitals",
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+        "@typescript-eslint",
+        "react"
+    ],
+    "rules": {
+        "react/react-in-jsx-scope": "off",
+        "react/jsx-uses-react": "off",
+        "no-restricted-imports": [
+            "error",
+            {
+                "paths": [
+                    {
+                        "name": "react",
+                        "importNames": [
+                            "default"
+                        ],
+                        "message": "Do not import React as a default import in Next.js. Use named hooks/types instead."
+                    }
+                ]
+            }
+        ],
+        "no-restricted-syntax": [
+            "error",
+            {
+                "selector": "TSTypeReference > TSQualifiedName[left.name='React'][right.name='FC']",
+                "message": "Prefer a plain function component with typed props instead of React.FC."
+            }
+        ]
+    }
+}

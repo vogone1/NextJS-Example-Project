@@ -4,6 +4,7 @@ import Navbar from "@/src/components/organisms/Navbar/Navbar";
 import { MouseCursorProvider } from "@/src/contexts/MouseCursorContext/MouseCursorContext";
 import type { Metadata } from "next";
 import { Fira_Code } from "next/font/google";
+import { cookies } from "next/headers";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -17,21 +18,23 @@ const firaCode = Fira_Code({
   variable: "--font-fira",
 });
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const cookieStore = await cookies();
+  const cookieVal = cookieStore.get("showCustomCursor")?.value; // '1' | '0' | undefined
+  const initialShowCustomCursor = cookieVal ? cookieVal === "1" : true; // default ON
+
+  // Read theme from cookie; if absent, CSS @media fallback in globals.css will apply
+  const themeCookie = cookieStore.get("theme")?.value as 'light' | 'dark' | undefined;
+
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" data-theme={themeCookie} suppressHydrationWarning>
       <body className={firaCode.variable}>
-        {/* Set theme before hydration to avoid flash */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(() => { try { const s = localStorage.getItem('theme'); const d = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches; const t = (s === 'light' || s === 'dark') ? s : (d ? 'dark' : 'light'); document.documentElement.dataset.theme = t; } catch (e) {} })();`,
-          }}
-        />
-        <MouseCursorProvider>
+        {/* removed inline script; CSS handles system fallback, cookie handles SSR */}
+        <MouseCursorProvider initialShowCustomCursor={initialShowCustomCursor}>
           <Navbar />
           {children}
           <GlobalMouseCursor />

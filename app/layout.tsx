@@ -1,4 +1,5 @@
 // app/layout.tsx
+import CursorGlobalToggle from '@/src/components/atoms/CursorGlobalToggle/CursorGlobalToggle';
 import GlobalMouseCursor from "@/src/components/organisms/GlobalMouseCursor/GlobalMouseCursor";
 import Navbar from "@/src/components/organisms/Navbar/Navbar";
 import { MouseCursorProvider } from "@/src/contexts/MouseCursorContext/MouseCursorContext";
@@ -36,6 +37,7 @@ export default async function RootLayout({
         {/* removed inline script; CSS handles system fallback, cookie handles SSR */}
         <MouseCursorProvider initialShowCustomCursor={initialShowCustomCursor}>
           <Navbar />
+          <CursorGlobalToggle />
           {children}
           <GlobalMouseCursor />
         </MouseCursorProvider>

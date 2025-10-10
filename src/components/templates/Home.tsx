@@ -1,5 +1,5 @@
 'use client';
-import { Alignment, Fit, Layout, useRive } from '@rive-app/react-canvas';
+import { Alignment, Fit, Layout, useRive } from '@rive-app/react-webgl2';
 import './Home.scss';
 
 export default function Home() {
@@ -11,6 +11,7 @@ export default function Home() {
       alignment: Alignment.Center,
     }),
   });
+  //TODO: make the component map over 3 different words in a loop!
   // Control overlay placement and size consistently between the words
   const overlayWidth = 500; // px
   const overlayHeight = 500; // px

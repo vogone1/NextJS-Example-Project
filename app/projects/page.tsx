@@ -2,7 +2,7 @@ export const metadata = { title: 'Projects' };
 
 export default function ProjectsPage() {
     return (
-        <section style={{ padding: '2rem' }}>
+        <section style={{ padding: '2rem', minHeight: '100vh' }}>
             <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
                 <h1>Projects</h1>
                 <p style={{ color: 'var(--muted)', maxWidth: '70ch' }}>

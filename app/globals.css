@@ -136,3 +136,16 @@ select,
   -ms-user-select: text;
   user-select: text;
 }
+
+/* Hide the OS cursor app-wide when the custom cursor is active */
+:root.cursor-custom-active,
+:root.cursor-custom-active * {
+  cursor: none !important;
+}
+
+/* Optional: allow opt-out on specific elements */
+[data-system-cursor='true'],
+:root.cursor-custom-active [data-system-cursor='true'],
+:root.cursor-custom-active [data-system-cursor='true'] * {
+  cursor: auto !important;
+}

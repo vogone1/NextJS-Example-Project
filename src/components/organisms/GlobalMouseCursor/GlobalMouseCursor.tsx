@@ -7,15 +7,29 @@ import "./GlobalMouseCursor.scss";
 
 export default function GlobalMouseCursor() {
   // All hooks at the top
-  const { cursorType, isMouseInWindow, showCustomCursor } = useMouseCursor();
+  const { cursorType, isMouseInWindow, showCustomCursor, getLastMousePos } = useMouseCursor();
   const cursorRef = useRef<HTMLDivElement>(null);
   const rafIdRef = useRef<number | null>(null);
   // Match .global-mouse-cursor width/height = 100px
   const offsetRef = useRef({ x: 50, y: 50 });
   const posRef = useRef({ x: 0, y: 0 });
 
+  // Read last known pointer position (from context) to seed initial transform
+  const lastPos = getLastMousePos?.();
+  const initialTransform =
+    lastPos
+      ? `translate(${lastPos.x - offsetRef.current.x}px, ${lastPos.y - offsetRef.current.y}px)`
+      : undefined;
+
   useEffect(() => {
     if (!showCustomCursor) return;
+
+    // Seed internal position and DOM transform immediately on toggle
+    if (lastPos && cursorRef.current) {
+      posRef.current = { x: lastPos.x, y: lastPos.y };
+      const { x: ox, y: oy } = offsetRef.current;
+      cursorRef.current.style.transform = `translate(${lastPos.x - ox}px, ${lastPos.y - oy}px)`;
+    }
 
     const update = () => {
       rafIdRef.current = null;
@@ -41,7 +55,7 @@ export default function GlobalMouseCursor() {
         rafIdRef.current = null;
       }
     };
-  }, [showCustomCursor]);
+  }, [showCustomCursor, lastPos]);
 
   if (!showCustomCursor || !isMouseInWindow) return null;
 
@@ -52,7 +66,7 @@ export default function GlobalMouseCursor() {
         className="global-mouse-cursor"
         ref={cursorRef}
         data-testid="GlobalMouseCursor"
-        style={{ willChange: "transform" }}
+        style={{ willChange: "transform", transform: initialTransform }}
       >
         <Cursor type={cursorType} />
       </div>
